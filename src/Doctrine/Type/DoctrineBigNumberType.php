@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Corytech\BigNumber;
+namespace Corytech\BigNumber\Doctrine\Type;
 
+use Corytech\BigNumber\BigNumber;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 

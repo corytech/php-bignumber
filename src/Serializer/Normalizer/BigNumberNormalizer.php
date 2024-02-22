@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Corytech\BigNumber;
+namespace Corytech\BigNumber\Serializer\Normalizer;
 
+use Corytech\BigNumber\BigNumber;
 use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
