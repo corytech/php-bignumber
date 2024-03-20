@@ -35,6 +35,6 @@ jobs:
           extensions: "${{ env.extensions }}"
           tools: flex
       - name: Composer
-        uses: php-actions/composer@v6
+        run: composer install
       - name: Run tests
         run: vendor/bin/phpunit tests
