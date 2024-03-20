@@ -18,5 +18,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Composer
         uses: php-actions/composer@v6
+        with:
+          args: --ignore-platform-reqs
       - name: Check cs
         run: vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php -v --diff --dry-run --using-cache=no .
