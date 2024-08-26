@@ -32,7 +32,7 @@ final readonly class BigNumber implements \Stringable
     public static function of(self|float|int|string $number): self
     {
         if (!is_numeric($number) && !($number instanceof self)) {
-            throw new \DomainException(sprintf('Numeric value is expected, "%s" provided', $number));
+            throw new \DomainException(\sprintf('Numeric value is expected, "%s" provided', $number));
         }
 
         if ($number instanceof self) {
@@ -53,7 +53,7 @@ final readonly class BigNumber implements \Stringable
         }
 
         throw new \InvalidArgumentException(
-            sprintf(
+            \sprintf(
                 'Unexpected type %s',
                 \gettype($number)
             )
@@ -86,7 +86,7 @@ final readonly class BigNumber implements \Stringable
         $integer = $parts[0];
         $fractional = substr($parts[1], 0, self::COMPANY_SCALE);
 
-        return rtrim(sprintf('%s.%s', $integer, rtrim($fractional, '0')), '.');
+        return rtrim(\sprintf('%s.%s', $integer, rtrim($fractional, '0')), '.');
     }
 
     public function eq(self|float|int|string $number, int $scale = self::INTERNAL_SCALE): bool
