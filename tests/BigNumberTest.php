@@ -202,7 +202,7 @@ class BigNumberTest extends TestCase
 
         $this->assertEquals(
             $expected,
-            $x->value($precision)
+            $x->format($precision)
         );
     }
 
@@ -247,7 +247,7 @@ class BigNumberTest extends TestCase
             ->add(1)
             // 1
             ->mod(256)
-            ->value(2);
+            ->format(2);
 
         $this->assertEquals('1.00', $x);
     }
@@ -256,27 +256,37 @@ class BigNumberTest extends TestCase
     {
         $this->assertEquals(
             '1111111111.111111111111',
-            BigNumber::of('1111111111.111111111111')->value(12),
+            BigNumber::of('1111111111.111111111111')->format(12),
         );
+
         $this->assertEquals(
             '1111111111.111111111119',
-            BigNumber::of('1111111111.111111111119')->value(12),
+            BigNumber::of('1111111111.111111111119')->format(12),
         );
+
         $this->assertEquals(
             '1111111111.000000000000',
-            BigNumber::of('1111111111.000000000000')->value(12),
+            BigNumber::of('1111111111.000000000000')->format(12),
         );
+
         $this->assertEquals(
             '1111111111.999999999999',
-            BigNumber::of('1111111111.999999999999')->value(12),
+            BigNumber::of('1111111111.999999999999')->format(12),
         );
+
+        $this->assertEquals(
+            '1111111111',
+            BigNumber::of('1111111111.999999999999')->format(),
+        );
+
         $this->assertEquals(
             '1111111112',
-            BigNumber::of('1111111111.999999999999')->value(0),
+            BigNumber::of('1111111111.999999999999')->round()->format(),
         );
+
         $this->assertEquals(
             '1111111112.00000000000',
-            BigNumber::of('1111111111.999999999999')->value(11),
+            BigNumber::of('1111111111.999999999999')->round(11)->format(11),
         );
 
         $this->assertEquals(
@@ -333,6 +343,31 @@ class BigNumberTest extends TestCase
             '10',
             BigNumber::of('10')->shorten(),
         );
+
+        $this->assertEquals(
+            '10.00',
+            BigNumber::of('10')->format(2),
+        );
+
+        $this->assertEquals(
+            '10.10',
+            BigNumber::of('10.1')->format(2),
+        );
+
+        $this->assertEquals(
+            '0.00',
+            BigNumber::of('0')->format(2),
+        );
+
+        $this->assertEquals(
+            '0.20',
+            BigNumber::of('0.2')->format(2),
+        );
+
+        $this->assertEquals(
+            '0.20000000',
+            BigNumber::of('0.2')->format(8),
+        );
     }
 
     public static function ofProvider(): array
@@ -377,14 +412,14 @@ class BigNumberTest extends TestCase
     {
         $this->assertSame(
             bccomp(
-                BigNumber::of($input)->value(),
+                BigNumber::of($input)->format(),
                 $expected
             ), 0
         );
 
         $this->assertSame(
             bccomp(
-                BigNumber::of(BigNumber::of($input))->value(),
+                BigNumber::of(BigNumber::of($input))->format(),
                 $expected
             ), 0
         );

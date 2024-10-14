@@ -11,7 +11,7 @@ final readonly class BigNumber implements \Stringable
     private const INTERNAL_SCALE = 128;
 
     private function __construct(
-        private string $value
+        private string $value,
     ) {
     }
 
@@ -72,11 +72,23 @@ final readonly class BigNumber implements \Stringable
         return (float) $this->shorten();
     }
 
-    public function value(int $scale = self::COMPANY_SCALE): string
+    public function format(int $decimals = 0, string $decimalSeparator = '.'): string
     {
-        return $this
-            ->round($scale)
-            ->value;
+        $parts = explode('.', bcadd($this->value, '0', self::COMPANY_SCALE));
+
+        $number = $parts[0];
+        $fractional = substr($parts[1], 0, $decimals);
+
+        if ($decimals === 0) {
+            return $number;
+        }
+
+        if (($fractionalLength = \strlen($fractional)) < $decimals) {
+            $format = '%0'.($decimals - $fractionalLength).'d';
+            $fractional .= \sprintf($format, '0');
+        }
+
+        return \sprintf('%s%s%s', $number, $decimalSeparator, $fractional);
     }
 
     public function shorten(): string
