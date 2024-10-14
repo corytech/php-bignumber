@@ -72,9 +72,23 @@ final readonly class BigNumber implements \Stringable
         return (float) $this->shorten();
     }
 
-    public function format(int $decimals = 0, string $decimalSeparator = '.', string $thousandsSeparator = ''): string
+    public function format(int $decimals = 0, string $decimalSeparator = '.'): string
     {
-        return number_format($this->asFloat(), $decimals, $decimalSeparator, $thousandsSeparator);
+        $parts = explode('.', bcadd($this->value, '0', self::COMPANY_SCALE));
+
+        $number = $parts[0];
+        $fractional = substr($parts[1], 0, $decimals);
+
+        if ($decimals === 0) {
+            return $number;
+        }
+
+        if (($fractionalLength = \strlen($fractional)) < $decimals) {
+            $format = '%0'.($decimals - $fractionalLength).'d';
+            $fractional .= \sprintf($format, '0');
+        }
+
+        return \sprintf('%s%s%s', $number, $decimalSeparator, $fractional);
     }
 
     public function shorten(): string

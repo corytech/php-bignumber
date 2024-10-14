@@ -258,25 +258,35 @@ class BigNumberTest extends TestCase
             '1111111111.111111111111',
             BigNumber::of('1111111111.111111111111')->format(12),
         );
+
         $this->assertEquals(
             '1111111111.111111111119',
             BigNumber::of('1111111111.111111111119')->format(12),
         );
+
         $this->assertEquals(
             '1111111111.000000000000',
             BigNumber::of('1111111111.000000000000')->format(12),
         );
+
         $this->assertEquals(
             '1111111111.999999999999',
             BigNumber::of('1111111111.999999999999')->format(12),
         );
+
         $this->assertEquals(
-            '1111111112',
+            '1111111111',
             BigNumber::of('1111111111.999999999999')->format(),
         );
+
+        $this->assertEquals(
+            '1111111112',
+            BigNumber::of('1111111111.999999999999')->round()->format(),
+        );
+
         $this->assertEquals(
             '1111111112.00000000000',
-            BigNumber::of('1111111111.999999999999')->format(11),
+            BigNumber::of('1111111111.999999999999')->round(11)->format(11),
         );
 
         $this->assertEquals(
