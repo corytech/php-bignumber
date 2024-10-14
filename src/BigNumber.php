@@ -11,7 +11,7 @@ final readonly class BigNumber implements \Stringable
     private const INTERNAL_SCALE = 128;
 
     private function __construct(
-        private string $value
+        private string $value,
     ) {
     }
 
@@ -72,11 +72,9 @@ final readonly class BigNumber implements \Stringable
         return (float) $this->shorten();
     }
 
-    public function value(int $scale = self::COMPANY_SCALE): string
+    public function format(int $decimals = 0, string $decimalSeparator = '.', string $thousandsSeparator = ''): string
     {
-        return $this
-            ->round($scale)
-            ->value;
+        return number_format($this->asFloat(), $decimals, $decimalSeparator, $thousandsSeparator);
     }
 
     public function shorten(): string
