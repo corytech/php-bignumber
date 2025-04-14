@@ -9,7 +9,7 @@ use Doctrine\DBAL\Types\Type;
 
 class BigNumberKernelBootExtension
 {
-    public static function load()
+    public static function load(): void
     {
         if (Type::hasType(DoctrineBigNumberType::TYPE_NAME)) {
             return;
