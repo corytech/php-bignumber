@@ -5,7 +5,7 @@
   "keywords": ["bignumber"],
   "license": "MIT",
   "require": {
-    "php": ">=8.2",
+    "php": ">=8.5",
     "ext-bcmath": "*"
   },
   "require-dev": {
