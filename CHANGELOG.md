@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.3](https://github.com/corytech/php-bignumber/compare/v2.0.2...v2.0.3) (2026-08-04)
+
+
+### 🧰 Maintenance
+
+* **CPD-8393:** Pin external actions with SHA ([22fcf87](https://github.com/corytech/php-bignumber/commit/22fcf8742e6fcd456d888947122e7b14343645bd))
+* **CPD-8393:** Pin external actions with SHA ([f157d19](https://github.com/corytech/php-bignumber/commit/f157d19d1a583a5e2ff8cb96a516856390bfc829))
+
 ## [2.0.2](https://github.com/corytech/php-bignumber/compare/v2.0.1...v2.0.2) (2026-06-03)
 
 
